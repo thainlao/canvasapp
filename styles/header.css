@@ -1,0 +1,16 @@
+.header{
+    display: flex;
+    width: 100%;
+    color: white;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.header a{
+    border: 1px solid rgb(107, 92, 92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px;
+    border-radius: 12px;
+}

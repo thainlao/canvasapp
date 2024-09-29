@@ -1,0 +1,90 @@
+.dashboard{
+    display: flex;
+}
+
+.dashboard header{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    position: relative;
+}
+
+.dashboard header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, silver, transparent);
+}
+
+.dashboard header img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.dashboard header h3{
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.dashboard header div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #ff4757, #8d3e4a);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.logout-button:hover {
+    transform: scale(1.05);
+    background-color: #e25167;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
+}
+
+.logout-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+/* Визуальный эффект при наведении */
+.logout-button:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Текст на кнопке */
+.logout-button span {
+    position: relative;
+    z-index: 1; /* Чтобы текст был выше эффекта */
+}
