@@ -23,7 +23,7 @@ const authOptions: NextAuthOptions = {
             const {name, email} = user
             if (account.provider === 'github') {
                 try {
-                    const res = await fetch('http://localhost:3000/api/user', 
+                    const res = await fetch(`${process.env.CLIENT_URL}/api/user`, 
                         {
                             method: "POST",
                             headers: {
@@ -43,7 +43,7 @@ const authOptions: NextAuthOptions = {
 
             if (account.provider === 'google') {
                 try {
-                    const res = await fetch('http://localhost:3000/api/user', 
+                    const res = await fetch(`${process.env.CLIENT_URL}/api/user`, 
                         {
                             method: "POST",
                             headers: {
