@@ -1,0 +1,46 @@
+.loading-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #000;
+    color: #fff; 
+    font-family: 'Arial', sans-serif;
+}
+
+.loader-eight {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.eight {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 5px solid transparent;
+    border-top-color: #3498db;
+    border-bottom-color: #db34bf;
+    border-radius: 50%;
+    animation: flow 1.8s infinite ease-in-out;
+}
+
+@keyframes flow {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        border-top-color: #db34bf;
+        border-bottom-color: #3498db;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        border-bottom-color: #d8cb14;
+        border-top-color: #1ed41e;
+    }
+}
+
+.loading-page p {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #fff;
+}

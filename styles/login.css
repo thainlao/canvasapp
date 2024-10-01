@@ -27,8 +27,32 @@
 }
 
 .login section h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #e7e9e8;
+}
+
+.login section h6 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.main_text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.span_title{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+    letter-spacing: 1px;
+    animation: glow 1.5s infinite alternate;
 }
 
 .login section h2 {

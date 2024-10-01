@@ -1,5 +1,8 @@
 .dashboard{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .dashboard header{
@@ -40,51 +43,151 @@
 
 .logout-button {
     padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(45deg, #ff4757, #8d3e4a);
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    background: #333;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 .logout-button:hover {
-    transform: scale(1.05);
-    background-color: #e25167;
+    background: #555;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
 }
 
-.logout-button:active {
-    transform: scale(0.95);
+/* dashboard_body */
+.dashboard_body {
+    display: flex;
+    flex-direction: column;
 }
 
-.logout-button::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.5s ease;
-    z-index: 0;
-}
-
-/* Визуальный эффект при наведении */
-.logout-button:hover::after {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* Текст на кнопке */
-.logout-button span {
+.text_buttons_section {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 1rem;
     position: relative;
-    z-index: 1; /* Чтобы текст был выше эффекта */
+}
+
+.text_buttons_section button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid #2196F3;
+    border-radius: 12px;
+    background: transparent;
+    color: #2196F3;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.text_buttons_section button:hover {
+    background: #2196F3;
+    color: white;
+    transform: scale(1.05);
+}
+
+.all_section {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.all_section ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.motionli {
+    height: 250px;
+    width: 250px;
+    border: none;
+    border: 5px solid #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5em;
+    border-radius: 25px;
+    transition: all 0.4s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: rgb(161, 158, 158);
+    transition: all 0.2s ease-in;
+}
+
+.motionli:hover {
+    filter: brightness(1.1);
+    transform: rotate(5deg);
+    box-shadow: 0 0 20px #007bff;
+    color: white;
+}
+
+@keyframes expand {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.box1, .box2, .box3 {
+    position: absolute;
+    filter: blur(45px);
+    animation: expand 5s infinite;
+}
+
+.box1 {
+    height: 150px;
+    width: 150px;
+    left: 65%;
+    top: 95%;
+    background-color: blueviolet;
+}
+
+.box2 {
+    height: 150px;
+    width: 150px;
+    background-color: rgb(61, 94, 99);
+    right: 75%;
+    top: 75%;
+}
+
+.box3 {
+    height: 150px;
+    width: 150px;
+    left: 90%;
+    top: 30%;
+    background-color: rgb(94, 63, 122);
+}
+
+.box1 {
+    animation-delay: 0s;
+}
+
+.box2 {
+    animation-delay: 1s;
+}
+
+.box3 {
+    animation-delay: 2s;
 }

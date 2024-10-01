@@ -13,3 +13,12 @@
 body{
   color: white;
 }
+
+::selection {
+  background-color: #070707;
+  color: #ffffff;
+}
+
+*:focus {
+  outline: none;
+}

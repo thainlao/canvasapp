@@ -2,13 +2,16 @@
 import { signIn, useSession } from "next-auth/react"
 import '@/styles/login.css';
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {motion} from 'framer-motion';
+import LoadingPage from "@/components/LoadingPage";
 
 export default function Login(){
     const { status } = useSession();
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
 
     useEffect(() => {
         if (status === 'authenticated') {
@@ -28,19 +31,39 @@ export default function Login(){
         transition: { duration: 0.7 }
     };
 
+    const handleSignIn = async (provider: string) => {
+        setLoading(true);
+        const callbackUrl = redirectUrl || '/dashboard';
+        await signIn(provider, { callbackUrl });
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        const initialUrl = new URLSearchParams(window.location.search).get('redirect');
+        if (initialUrl) {
+            setRedirectUrl(initialUrl);
+        }
+    }, []);
+
+    if (loading) return <LoadingPage />
+
     return (
         <div className="login">
             <section>
-                <h1>Sign In</h1>
-                <h2>choose an authorization method that is convenient for you</h2>
+                <h6>Eclipse <span className="span_title">Workspace</span></h6>
+
+                <div className="main_text">
+                    <h1>Sign In</h1>
+                    <h2>choose an authorization method that is convenient for you</h2>
+                </div>
                 
                 <div className="buttons">
-                    <button onClick={() => signIn('google')} className="google_button">
+                    <button onClick={() => handleSignIn('google')} className="google_button">
                         <img src="https://authjs.dev/img/providers/google.svg"/>
                         <span>Sign in with Google</span>
                     </button>
 
-                    <button onClick={() => signIn('github')} className="github_button">
+                    <button onClick={() => handleSignIn('github')} className="github_button">
                         <img src="https://authjs.dev/img/providers/github.svg"/>
                         <span>Sign in with Github</span>
                     </button>

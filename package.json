@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "newdev": "node wsserver.js",
+    "newdevtest": "nodemon wsserver.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,7 +16,9 @@
     "next": "14.2.13",
     "next-auth": "^4.24.8",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "socket.io": "^4.8.0",
+    "socket.io-client": "^4.8.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -22,6 +26,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
+    "nodemon": "^3.1.7",
     "typescript": "^5"
   }
 }
