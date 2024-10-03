@@ -22,3 +22,15 @@ export interface IBoard{
     participants: string[];
     createdAt: string;
 }
+
+export interface WorkingCanvasProps {
+    participants: string[] | undefined;
+    currentUserName: any;
+}
+
+export interface ICursor {
+    x: number;
+    y: number;
+    name: string;
+    color: string;
+}

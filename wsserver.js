@@ -15,24 +15,20 @@ app.prepare().then(() => {
   const io = new Server(httpServer, {
     path: '/api/socket',
   });
-  const userMapping = {};
 
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    socket.on("registerUser", (username) => {
-      userMapping[socket.id] = username; // Store the mapping of socket ID to username
-  });
+    socket.on("cursorMovement", (data) => {
+      socket.broadcast.emit("cursorMovement", {
+        id: socket.id,...data
+      })
+    })
 
-  socket.on("mouseMove", (data) => {
-      const username = userMapping[data.userId] || 'Unknown'; // Get the username from the mapping
-      socket.broadcast.emit("mouseMove", { ...data, username }); // Emit with the username
-  });
+    socket.on("disconnect", () => {
+        console.log(`User disconnected: ${socket.id}`);
+    });
 
-  socket.on("disconnect", () => {
-      console.log(`User disconnected: ${socket.id}`);
-      delete userMapping[socket.id]; // Clean up on disconnect
-  });
   });
 
   httpServer

@@ -22,3 +22,16 @@ body{
 *:focus {
   outline: none;
 }
+
+::-webkit-scrollbar {
+  width: 6px; 
+  height: 9px;
+  background: #afd3e7;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #a343ac;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}

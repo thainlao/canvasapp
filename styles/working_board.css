@@ -3,12 +3,17 @@
     flex-direction: column;
 }
 
-.working_board header{
+.working_board header {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 5px solid silver;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10
 }
 
 .working_board header img {

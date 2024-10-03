@@ -1,6 +1,3 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import Header from "../components/Header";
 import Mainpage from "@/components/Mainbody";
 import Head from "next/head";
 

@@ -2,67 +2,51 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import '@/styles/canvas.css';
-import { IUser } from '@/lib/types';
-
+import { ICursor, WorkingCanvasProps } from '@/lib/types';
+import { generateRandomColor } from '@/lib/functions';
+import LeftItem from './LeftItem';
 const socket = io({ path: '/api/socket' });
 
-export interface WorkingCanvasProps {
-    participants: string[] | undefined;
-}
+const WorkingCanvas: React.FC<WorkingCanvasProps> = ({ participants, currentUserName }) => {
+    const [cursors, setCursors] = useState<{ [key: string]: ICursor }>({});
 
-const WorkingCanvas: React.FC<WorkingCanvasProps> = ({participants}) => {
-    const [users, setUsers] = useState<IUser[]>([]);
+    let userColor = generateRandomColor();
+    useEffect(() => {
+        socket.on("cursorMovement", (data) => {
+            setCursors((prev) => ({
+                ...prev,
+                [data.id]: { x: data.x, y: data.y, name: data.name, color: data.color }
+            }));
+        });
+
+        return () => { socket.off("cursorMovement"); };
+    }, []);
+
+    const handleMouseMove = (e: MouseEvent) => {
+        const x = e.clientX;
+        const y = e.clientY;
+
+        socket.emit("cursorMovement", {
+            x, y, name: currentUserName, color: userColor
+        });
+    };
 
     useEffect(() => {
-        const username = participants?.find(participant => participant === socket.id) || 'Unknown';
-
-        const handleMouseMove = (event: MouseEvent) => {
-            const data = {
-                x: event.clientX,
-                y: event.clientY,
-                userId: socket.id,
-                username: username,
-            };
-            socket.emit('mouseMove', data);
-        };
-
-        const handleMouseMoveFromOthers = (data: { userId: string; x: number; y: number; username: string }) => {
-            setUsers((prevUsers: IUser[]) => {
-                const existingUser = prevUsers.find((user: IUser) => user._id === data.userId);
-                if (existingUser) {
-                    return prevUsers.map((user: IUser) => 
-                        user._id === data.userId ? { ...user, x: data.x, y: data.y, username: data.username } : user
-                    );
-                } else {
-                    return [...prevUsers, { _id: data.userId, x: data.x, y: data.y, username: data.username, email: '', name: '', createdAt: '', }]; // Provide default values for other properties
-                }
-            });
-        };
-
-        socket.on('mouseMove', handleMouseMoveFromOthers);
-        window.addEventListener('mousemove', handleMouseMove);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            socket.off('mouseMove', handleMouseMoveFromOthers);
-        };
-    }, [participants]);
-
-    useEffect(() => {
-        const username = participants?.find(participant => participant === socket.id) || 'Unknown';
-        socket.emit('registerUser', username); // Register the username
-    }, [participants]);
+        document.addEventListener('mousemove', handleMouseMove);
+        return () => { document.removeEventListener('mousemove', handleMouseMove); };
+    }, []);
 
     return (
-        <div className="working_canvas">
-            {users.map((user) => (
-                <div key={user._id} style={{ position: 'absolute', left: user.x, top: user.y }}>
-                    <div className="cursor" />
-                    <div className="username" style={{ position: 'absolute', left: user.x, top: user.y }}>
-                        <h2>{user.username}</h2>
+        <div className='canvas-container'>
+            <div className="working_canvas">
+                <LeftItem />
+                {Object.entries(cursors).map(([id, { x, y, name, color }]) => (
+                    <div className='user_cursor' key={id} style={{ position: 'absolute', left: x, top: y }}>
+                        <div className="cursor" style={{ backgroundColor: color }} />
+                        <h2 className='user_name' style={{ color }}>{name}</h2>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };

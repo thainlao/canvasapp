@@ -76,7 +76,7 @@ const BoardDetail = ({ params }: { params: { id: string } }) => {
                 </div>
 
                 <div>
-                    <h1>all users</h1>
+                    <h1>users: {board?.participants.length }</h1>
                     <div className="participants">
                         {board?.participants.map((participant: string) => {
                             const initials = participant.split(' ')
@@ -100,7 +100,7 @@ const BoardDetail = ({ params }: { params: { id: string } }) => {
                     </button>
                 </div>
             </header>
-            <WorkingCanvas participants={board?.participants} />    
+            <WorkingCanvas participants={board?.participants} currentUserName={data?.user?.name}/>    
             <ModalInvide boardId={board?._id} isOpen={isModalOpen} onClose={closeModal}/>
         </div>
     );
