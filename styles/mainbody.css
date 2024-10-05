@@ -1,9 +1,143 @@
 .mainpage {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    justify-content: start;
+    min-height: 100vh;
+    height: auto;
     flex-direction: column;
+    background-color: #222b45;
     font-size: 1.3rem;
+    position: relative;
 }
 
+.mainpage header h1{
+    font-size: 2.5rem;
+}
+
+.mainpage header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding: 1.5rem;
+    align-items: center;
+}
+
+.mainpage header div{
+    display: flex;
+    flex-direction: row;
+    gap: 1.6rem;
+    align-items: center;
+}
+
+.mainpage header div button{
+    padding: 7px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.mainpage header a{
+    text-decoration: none;
+    font-weight: 200;
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    position: relative;
+    transition: all 0.3s ease; 
+}
+
+.mainpage header a:hover{
+    color: #1876d2;
+}
+
+.mainpage header a::after{
+    content: '';
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    bottom: -4px; 
+    height: 2px; 
+    background-color: #1876d2;; 
+    transform: scaleX(0); 
+    transition: transform 0.3s ease; 
+}
+
+.mainpage header a:hover::after{
+    transform: scaleX(1); 
+}
+
+.main_button{
+  margin: 10px !important;
+  padding: 15px 50px !important;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px !important;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #1876d2 0%, #2581de  51%, #1f68b1  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.main_button:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.main_button:active {
+  transform: scale(0.95);
+}
+
+.text_section {
+    font-size: 2.5rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 2rem;
+}
+
+.text_section h4{
+    font-size: 1.2rem;
+    color: rgb(172, 161, 161);
+}
+
+.text_section span{
+    color: #1876d2
+}
+
+.central_section {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text_section button{
+    height: 45px;
+    width: 140px;
+    cursor: pointer;
+    color: white;
+    background-color: #1876d2;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.2s ease-in;
+&:hover{
+    box-shadow: 0px 0px 14px #15518c
+}}
+
+.central_section img{
+    object-fit: cover;
+}
